@@ -10,7 +10,7 @@ function ChatInterface() {
   const [userInput, setUserInput] = useState("");
   const [products, setProducts] = useState([]);
   const { data, error } = useGetProductsQuery({
-    pageNumber: 2,
+    pageNumber: 1,
   });
 
   if (error) {
@@ -34,10 +34,10 @@ function ChatInterface() {
 
   useEffect(() => {
     if (data) {
-      setProducts(data);
+      console.log(data);
+      setProducts(data.data.docs);
     }
   }, [data]);
-
   const textQuery = async (text) => {
     if (text.trim() === "") {
       return;
