@@ -208,7 +208,7 @@ const OrderDetail = () => {
               Name: {order.data.userId.firstName}
             </Typography>
             <Typography variant="subtitle2">
-              Phone number: {order.data.userId.phoneNumber}
+              Phone number: {order.data.shipping?.address?.phoneNumber}
             </Typography>
             <Typography variant="subtitle2">
               Email: {order.data.userId.email}
