@@ -34,7 +34,6 @@ function ChatInterface() {
 
   useEffect(() => {
     if (data) {
-      console.log(data);
       setProducts(data.data.docs);
     }
   }, [data]);
