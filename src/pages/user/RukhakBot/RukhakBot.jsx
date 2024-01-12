@@ -84,9 +84,9 @@ function ChatInterface() {
   };
 
   return (
-    <Box component="main">
+    <Box component="main" >
       <MainTopNavigationBar />
-      <Box sx={{ padding: "1rem", overflowY: "auto" }} ref={chatMessagesRef}>
+      <Box sx={{ padding: "1rem", overflowY: "auto",height:"83vh" }} ref={chatMessagesRef}>
         {conversation.map((entry, index) =>
           entry.by === "bot" ? (
             <BotMessage key={index} message={entry.message} />

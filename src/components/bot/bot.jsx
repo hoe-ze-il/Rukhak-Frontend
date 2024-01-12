@@ -47,7 +47,6 @@ export const BottomBar = ({
       position: "fixed",
       bottom: 0,
       left: 0,
-      zIndex: "1400",
       width: "100%",
       padding: "1rem",
       backgroundColor: "#BED4AD",

@@ -25,7 +25,7 @@ export function handleIntentResponse(
       if (filteredProducts.length === 0) {
         setConversation((prevConversation) => [
           ...prevConversation,
-          { by: "bot", message: "sorry, we don't have that category" },
+          { by: "bot", message: "sorry, we don't have that product in category yet" },
         ]);
       } else {
         setConversation((prevConversation) => [
