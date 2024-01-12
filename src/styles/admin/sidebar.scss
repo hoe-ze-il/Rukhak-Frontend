@@ -1,0 +1,167 @@
+aside {
+  height: 100vh;
+
+  .navbar {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-right-width: 1px;
+    box-shadow: 0 0 1rem 0.5rem rgb(0 0 0 / 0.05);
+
+    a {
+      text-decoration: none;
+      color: #000;
+    }
+
+    .header {
+      padding: 1rem;
+      padding-bottom: 0.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .logo {
+        overflow: hidden;
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        width: 2px;
+      }
+      .expanded {
+        width: 8rem;
+      }
+      .collapsed {
+        width: 0rem;
+      }
+
+      .toggle {
+        padding: 0.375rem;
+        border: none;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 100px;
+        background-color: rgb(238, 238, 238);
+        &:hover {
+          background-color: rgb(221, 221, 221);
+        }
+      }
+    }
+
+    .sidebar-items {
+      flex: 1 1 0%;
+      padding: 0 0.75rem;
+
+      .collapsed {
+        justify-content: center;
+      }
+      .tooltip {
+        z-index: 10;
+        position: absolute;
+        border-radius: 0.375rem;
+        padding: 0.25rem 0.5rem;
+        margin-left: 1.5rem;
+        font-size: 0.875rem;
+        background-color: #ebf4ff;
+        color: #1e3a8a;
+        visibility: hidden;
+        opacity: 0;
+        transition-property: opacity;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        transition-delay: 0.1s;
+      }
+
+      .navigation-links.collapsed:hover .tooltip {
+        visibility: visible;
+        opacity: 1;
+        left: 2.5rem;
+      }
+
+      .item-title {
+        overflow: hidden;
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+        display: none;
+      }
+      .title-visible {
+        display: inline;
+        margin-left: 0.75rem;
+      }
+      .alert-circle {
+        position: absolute;
+        right: 0.5rem;
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 9999px;
+        background-color: #6366f1;
+      }
+      .alert-collapsed {
+        top: 0.5rem;
+      }
+
+      .title-collapsed {
+        position: absolute;
+        left: 100%;
+        border-radius: 0.375rem; /* or border-radius: 6px; depending on your preferred unit */
+        padding: 0.5rem 1rem; /* or padding: 8px 16px; depending on your preferred unit */
+        margin-left: 1.5rem; /* or margin-left: 24px; depending on your preferred unit */
+        background-color: #ebf4ff;
+        color: #1e3a8a;
+        font-size: 0.875rem; /* or font-size: 14px; depending on your preferred unit */
+        visibility: hidden;
+        transition: visibility 0s, opacity 0.2s ease-out;
+        opacity: 0;
+        transition-delay: 0.1s;
+      }
+    }
+
+    .account {
+      border-top-width: 1px;
+      display: flex;
+      align-items: center;
+      padding: 0.75rem;
+      justify-content: center;
+
+      .profile {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 0.375rem;
+      }
+      .information {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        overflow: hidden;
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 150ms;
+
+        .user {
+          line-height: 1rem;
+
+          h4 {
+            font-size: 600;
+            margin: 0;
+          }
+          span {
+            font-size: 0.75rem;
+            line-height: 1rem;
+            color: rgb(75 85 99);
+          }
+        }
+      }
+      .expanded {
+        width: 13rem;
+        margin-left: 0.75rem;
+      }
+      .collapsed {
+        width: 0;
+      }
+    }
+  }
+}

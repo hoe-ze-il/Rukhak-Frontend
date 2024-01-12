@@ -1,0 +1,37 @@
+.charts {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem;
+  .line-chart {
+    flex: 1;
+    position: relative;
+    aspect-ratio: 4 / 2;
+    height: auto;
+  }
+}
+
+.meta-data {
+  margin: 0 1rem;
+  display: flex;
+  gap: 1rem;
+
+  .data-cards {
+    flex: 1;
+    width: 100%;
+    display: flex;
+
+    div {
+      flex: 1;
+    }
+    .descriptions {
+      h2 {
+        padding: 0;
+      }
+    }
+    .icons {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+  }
+}

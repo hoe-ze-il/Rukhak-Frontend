@@ -1,0 +1,22 @@
+.price-range {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.filter-sections {
+  padding-bottom: 0.5rem;
+  p {
+    padding-bottom: 0.5rem;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.filter-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}

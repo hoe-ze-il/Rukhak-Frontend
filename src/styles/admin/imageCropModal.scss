@@ -1,0 +1,47 @@
+.modal-background {
+  margin: 0;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000000d2;
+}
+
+.modal-container {
+  flex: 0.8;
+}
+
+.image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: auto;
+  height: 90vh;
+  padding: 4px;
+  max-width: 90vw;
+  max-height: 90vh;
+  justify-content: center;
+}
+
+.image-container-landscape {
+  width: 90vw;
+  height: auto;
+  max-width: 90vw;
+  max-height: 90vh;
+}
+
+.crop-preview {
+  display: flex;
+  justify-content: center;
+}
+
+.dropzone-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}

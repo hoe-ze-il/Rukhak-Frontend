@@ -1,0 +1,41 @@
+.seller-home {
+  display: flex;
+  width: 100vw;
+}
+
+.container {
+  width: 100%;
+}
+
+.listing-container {
+  width: 100%;
+  padding: 2em;
+}
+
+.listing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2em;
+}
+
+.search-filter-div {
+  display: flex;
+}
+
+.top-table-actions-div {
+  display: flex;
+  gap: 0.6em;
+  margin-bottom: 0.6em;
+}
+
+.product-links {
+  color: #000;
+  transition: all 0.2s ease-out;
+  display: inline-block;
+  transform-origin: 50% 50%;
+
+  &:hover {
+    transform: scale(1.04);
+  }
+}

@@ -1,0 +1,19 @@
+.feed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.editor {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  h2 {
+    text-align: center;
+  }
+}
+.preview {
+  img {
+    width: 100%;
+  }
+}

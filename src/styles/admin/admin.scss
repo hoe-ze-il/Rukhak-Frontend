@@ -1,0 +1,127 @@
+.admin-home {
+  display: flex;
+  width: 100vw;
+  background-color: #fff;
+
+  .admin-content {
+    flex: 1;
+
+    h1 {
+      padding: 16px;
+      font-size: 32px;
+      font-weight: 500;
+      margin: 0;
+    }
+  }
+
+  .inventory-management {
+    box-sizing: border-box;
+    height: 100vh;
+  }
+
+  .table-footer {
+    width: 100%;
+    // padding: 16px;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .filter-options {
+    display: flex;
+    align-items: center;
+  }
+
+  .search-container {
+    flex: 1;
+    width: 100%;
+    .search-bar {
+      width: 50%;
+      transition: all 0.2s ease-in;
+      &:focus {
+        width: 100%;
+      }
+    }
+  }
+
+  .filter-sort {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    button {
+      margin-left: 16px;
+      span {
+        padding-left: 8px;
+      }
+    }
+  }
+
+  .go-to-page {
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 0 16px;
+    .input-page {
+      width: 72px;
+    }
+  }
+
+  .pd-16 {
+    padding: 16px;
+  }
+
+  .bold-font {
+    font-weight: bold;
+  }
+
+  .px-10-pc {
+    padding: 0 10%;
+  }
+
+  .table-container {
+    padding: 1rem;
+    overflow: scroll;
+  }
+
+  .select-columns {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 16px;
+  }
+}
+
+.product-links {
+  color: #000;
+  transition: all 0.2s ease-out;
+  display: inline-block;
+  transform-origin: 50% 50%;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.column-names {
+  display: flex;
+  align-items: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.back-button {
+  margin-top: 16px;
+}
+
+.seller-extra-info {
+  margin: 1rem 0;
+  p {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+}
