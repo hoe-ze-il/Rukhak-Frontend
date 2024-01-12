@@ -14,7 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import SlowMotionVideoOutlinedIcon from "@mui/icons-material/SlowMotionVideoOutlined";
 import AttachFileOutlinedIcon from "@mui/icons-material/AttachFileOutlined";
 import DocumentScannerOutlinedIcon from "@mui/icons-material/DocumentScannerOutlined";
-import Dropzone from "./DropZone";
+import Dropzone from "./Dropzone";
 
 const FileTypes = [
   { name: "Video", icon: <SlowMotionVideoOutlinedIcon /> },
