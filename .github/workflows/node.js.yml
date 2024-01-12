@@ -5,11 +5,10 @@ name: Node.js CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
   build:
-
     runs-on: self-hosted
 
     strategy:
@@ -18,18 +17,20 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - name: Set up environment file
-      run: echo “VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}” > .env
-        && echo “PORT=${{ secrets.PORT }}” >> .env
-        && echo “VITE_GA_MEASUREMENT_ID=${{ secrets.VITE_GA_MEASUREMENT_ID }}” >> .env
-        && echo “VITE_GOOGLE_CLIENT_ID=${{ secrets.VITE_GOOGLE_CLIENT_ID }}” >> .env
-        && echo “VITE_MAPBOX_TOKEN=${{ secrets.VITE_MAPBOX_TOKEN }}” >> .env
-        && echo “VITE_MAPBOX_STYLES=${{ secrets.VITE_MAPBOX_STYLES }}” >> .env
-    - run: npm ci
-    - run: npm run build
+      - uses: actions/checkout@v3
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: Set up environment file
+        run: |
+          echo "VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}" > .env
+          echo "PORT=${{ secrets.PORT }}" >> .env
+          echo "VITE_GA_MEASUREMENT_ID=${{ secrets.VITE_GA_MEASUREMENT_ID }}" >> .env
+          echo "VITE_GOOGLE_CLIENT_ID=${{ secrets.VITE_GOOGLE_CLIENT_ID }}" >> .env
+          echo "VITE_MAPBOX_TOKEN=${{ secrets.VITE_MAPBOX_TOKEN }}" >> .env
+          echo "VITE_MAPBOX_STYLES=${{ secrets.VITE_MAPBOX_STYLES }}" >> .env
+
+      - run: npm ci
+      - run: npm run build
