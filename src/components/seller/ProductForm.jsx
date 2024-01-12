@@ -13,20 +13,29 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { ProductFormContext } from "@/contexts/seller/ProductFormContext";
 import { useContext, useEffect, useState } from "react";
 import DiscardModal from "./DiscardModal";
-// import SellerSearch from "./SellerSearch";
 import { useNavigate } from "react-router-dom";
 import { markdownToHtml, htmlToMarkdown } from "@/utils/admin/htmlParser";
 import dayjs from "dayjs";
 import Loading from "@/components/admin/product/Loading";
-import { useEditOwnProductMutation } from "@/features/seller/sellerProductSlice";
+import {
+  useEditOwnProductMutation,
+  useCreateOwnProductMutation,
+} from "@/features/seller/sellerProductSlice";
 import { newProductToFormData } from "@/utils/admin/createProductFormData";
 import { editProductToFormData } from "@/utils/admin/editProductFormData";
+import { useSelector } from "react-redux";
 
 function ProductForm({ mode, product, setEdit }) {
   const isEditMode = mode === "edit";
   const navigate = useNavigate();
   const { file, files, description, setFile, setFiles, setDescription } =
     useContext(ProductFormContext);
+
+  const categories = useSelector(
+    (state) => state.api.queries["getCategory(undefined)"]?.data
+  );
+
+  console.log(categories);
 
   useEffect(() => {
     if (isEditMode) {
@@ -53,7 +62,7 @@ function ProductForm({ mode, product, setEdit }) {
   const [dimension, setDimension] = useState(
     isEditMode ? product?.dimension : ""
   );
-  const [sellerId, setSellerId] = useState(isEditMode ? product?.sellerId : "");
+  // const [sellerId, setSellerId] = useState(isEditMode ? product?.sellerId : "");
   const [price, setPrice] = useState(isEditMode ? product?.basePrice : "");
   const [expirationDate, setExpirationDate] = useState(
     isEditMode ? dayjs(product.expirationDate) : dayjs()
@@ -66,7 +75,6 @@ function ProductForm({ mode, product, setEdit }) {
   const [validUnit, setValidUnit] = useState(true);
   const [validPrice, setValidPrice] = useState(true);
   const [validStockAlert, setValidStockAlert] = useState(true);
-  const [validSellerId, setValidSellerId] = useState(true);
   const [validDescription, setValidDescription] = useState(true);
   const [validThumbnail, setValidThumbnail] = useState(true);
   const [validPhoto, setValidPhoto] = useState(true);
@@ -78,8 +86,8 @@ function ProductForm({ mode, product, setEdit }) {
   );
 
   // Initialize hooks
-  // const [createProduct, { isLoading: isCreatingProduct }] =
-  //   useCreateProductMutation();
+  const [createOwnProduct, { isLoading: isCreatingProduct }] =
+    useCreateOwnProductMutation();
 
   const [editProduct, { isLoading: isEditingProduct }] =
     useEditOwnProductMutation();
@@ -101,7 +109,6 @@ function ProductForm({ mode, product, setEdit }) {
       unit: { value: unit, setter: setValidUnit },
       price: { value: price, setter: setValidPrice },
       stockAlert: { value: stockAlert, setter: setValidStockAlert },
-      sellerId: { value: sellerId, setter: setValidSellerId },
     };
 
     setAttemptedSubmit(true);
@@ -133,14 +140,13 @@ function ProductForm({ mode, product, setEdit }) {
       dimension,
       stockAlert,
       status: visibility,
-      sellerId,
       expirationDate,
     };
 
     if (!isEditMode) {
-      // const newProduct = await newProductToFormData(inputData);
-      // await createProduct(newProduct).unwrap();
-      // discardNewForm();
+      const newProduct = await newProductToFormData(inputData);
+      await createOwnProduct(newProduct).unwrap();
+      discardNewForm();
       resetAllState();
       navigate(-1);
     } else {
@@ -174,7 +180,6 @@ function ProductForm({ mode, product, setEdit }) {
     setExpirationDate("");
     setFile("");
     setFiles([]);
-    setSellerId("");
     setDimension("");
     setAttemptedSubmit(false);
   }
@@ -189,8 +194,7 @@ function ProductForm({ mode, product, setEdit }) {
     navigate(-1);
   }
 
-  // const isLoading = isCreatingProduct || isEditingProduct;
-  const isLoading = isEditingProduct;
+  const isLoading = isCreatingProduct || isEditingProduct;
 
   return (
     <>
@@ -368,7 +372,7 @@ function ProductForm({ mode, product, setEdit }) {
                       error={attemptedSubmit && !validUnit}
                       helperText={
                         attemptedSubmit && !validUnit
-                          ? "Product stock is required"
+                          ? "Unit is required (ex: kg, item...)"
                           : ""
                       }
                     />
@@ -479,14 +483,14 @@ function ProductForm({ mode, product, setEdit }) {
 
 export default ProductForm;
 
-export const categories = [
-  { _id: 1, name: "Creeper" },
-  { _id: 2, name: "Tree" },
-  { _id: 3, name: "Tool" },
-  { _id: 4, name: "Vegetable" },
-  { _id: 5, name: "Indoor" },
-  { _id: 6, name: "Outdoor" },
-  { _id: 7, name: "Climber" },
-  { _id: 8, name: "Herb" },
-  { _id: 9, name: "Shrub" },
-];
+// export const categories = [
+//   { _id: 1, name: "Creeper" },
+//   { _id: 2, name: "Tree" },
+//   { _id: 3, name: "Tool" },
+//   { _id: 4, name: "Vegetable" },
+//   { _id: 5, name: "Indoor" },
+//   { _id: 6, name: "Outdoor" },
+//   { _id: 7, name: "Climber" },
+//   { _id: 8, name: "Herb" },
+//   { _id: 9, name: "Shrub" },
+// ];

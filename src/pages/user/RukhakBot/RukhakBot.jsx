@@ -5,6 +5,7 @@ import Axios from "axios";
 import { ButtonOptions } from "@/components/bot/botComponent";
 import { useGetProductsQuery } from "@/features/api/getProductsSlice";
 import { handleIntentResponse } from "@/components/bot/botFunction";
+import MainTopNavigationBar from "@/components/user/MainTopNavigationBar";
 
 function ChatInterface() {
   const [userInput, setUserInput] = useState("");
@@ -84,10 +85,8 @@ function ChatInterface() {
 
   return (
     <Box component="main">
-      <Box
-        sx={{ padding: "1rem", overflowY: "auto", height: "564px" }}
-        ref={chatMessagesRef}
-      >
+      <MainTopNavigationBar />
+      <Box sx={{ padding: "1rem", overflowY: "auto" }} ref={chatMessagesRef}>
         {conversation.map((entry, index) =>
           entry.by === "bot" ? (
             <BotMessage key={index} message={entry.message} />

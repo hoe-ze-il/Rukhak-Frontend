@@ -78,6 +78,14 @@ export const extendedApiSlice = apiSlice.injectEndpoints({
         { type: "Product", id: arg.productId },
       ],
     }),
+    createOwnProduct: builder.mutation({
+      query: (inputData) => ({
+        url: "/seller/products",
+        method: "POST",
+        body: inputData,
+      }),
+      invalidatesTags: [{ type: "Product", id: "LIST" }],
+    }),
   }),
 });
 
@@ -87,4 +95,5 @@ export const {
   useDeleteOwnProductMutation,
   useEditOwnProductMutation,
   useGetProductQuery,
+  useCreateOwnProductMutation,
 } = extendedApiSlice;
