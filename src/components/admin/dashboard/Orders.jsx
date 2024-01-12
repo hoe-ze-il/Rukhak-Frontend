@@ -40,8 +40,16 @@ function Orders({ mainContainerWidth }) {
     chartRef.current = new Chart(ctx, {
       type: "bar",
       data: {
-        // labels: ["Day 1", "Day 2", "Day 3", "Day 4", "Day 5", "Day 6", "Day 7"],
-        labels: xLabels,
+        labels: [
+          "10 Jan",
+          "11 Jan",
+          "12 Jan",
+          "13 Jan",
+          "14 Jan",
+          "15 Jan",
+          "16 Jan",
+        ],
+        // labels: xLabels,
         datasets: [
           {
             label: "Products Sold",
