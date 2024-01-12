@@ -17,7 +17,7 @@ import OrderHistory from "./pages/user/OrderHistory/OrderHistory";
 import Cart from "./pages/user/Cart/Cart";
 import CheckoutCart from "@/pages/user/Checkout/CheckoutCart";
 import CheckoutBuyNow from "@/pages/user/Checkout/CheckoutBuyNow";
-import AddressList from "@/pages/user/GeneralSetting/AddressList"
+import AddressList from "@/pages/user/GeneralSetting/AddressList";
 import PayPal from "@/pages/user/PayPal/PayPal";
 import ConfirmOrder from "@/pages/user/ConfirmOrder/ConfirmOrder";
 import RukhakBot from "./pages/user/RukhakBot/RukhakBot";
@@ -86,7 +86,7 @@ function App() {
             <SearchProductsContextProvider>
               <ReviewContextProvider>
                 <CategoriesContextProvider>
-                  <Warpping >
+                  <Warpping>
                     <Routes>
                       {/* Admin route */}
                       <Route element={<AdminLayout />}>
@@ -189,7 +189,7 @@ function App() {
                           element={<DeleteAccount />}
                         />
                       </Route>
-
+                      <Route path="/rukhakbot/*" element={<RukhakBot />} />
                       <Route path="/" element={<GeneralPageLayout />}>
                         {/* Public Page */}
                         <Route index element={<Homepage />} />
@@ -229,8 +229,6 @@ function App() {
                             path="/notification"
                             element={<Notification />}
                           />
-                          
-                          <Route path="/rukhakbot/*" element={<RukhakBot />} />
 
                           <Route
                             path="/orderhistory/*"
@@ -261,39 +259,35 @@ function App() {
                           </Route>
                         </Route>
 
-                        
-                          <Route path="/results" element={<SearchResult />} />
+                        <Route path="/results" element={<SearchResult />} />
+                        <Route
+                          path="/checkout/cart"
+                          element={<CheckoutCart />}
+                        />
+                        <Route
+                          path="/checkout/buynow"
+                          element={<CheckoutBuyNow />}
+                        />
+                        <Route path="/paypal" element={<PayPal />} />
+                        <Route path="/help/*" element={<HelpAndFeedback />} />
+                        {/* Protected Route */}
+                        <Route element={<AuthGuard />}>
                           <Route
-                            path="/checkout/cart"
-                            element={<CheckoutCart />}
+                            path="/notification"
+                            element={<Notification />}
                           />
-                          <Route
-                            path="/checkout/buynow"
-                            element={<CheckoutBuyNow />}
-                          />
-                          <Route path="/paypal" element={<PayPal />} />
-                          <Route path="/help/*" element={<HelpAndFeedback />} />
-                          {/* Protected Route */}
-                          <Route element={<AuthGuard />}>
-                            <Route
-                              path="/notification"
-                              element={<Notification />}
-                            />
-                            <Route
-                              path="/rukhakbot/*"
-                              element={<RukhakBot />}
-                            />
+                          <Route path="/rukhakbot/*" element={<RukhakBot />} />
 
-                            <Route
-                              path="/unauthorize-seller"
-                              element={<UnAuthSeller />}
-                            />
-                          </Route>
+                          <Route
+                            path="/unauthorize-seller"
+                            element={<UnAuthSeller />}
+                          />
+                        </Route>
                       </Route>
 
                       {/* Forum Page */}
-                      <Route element={<AuthGuard/>}>
-                      <Route path="/forum/*" element={<ForumPage />} />
+                      <Route element={<AuthGuard />}>
+                        <Route path="/forum/*" element={<ForumPage />} />
                       </Route>
 
                       {/* Cart Page */}

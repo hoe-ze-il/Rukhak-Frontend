@@ -11,6 +11,8 @@ import { OrderFormContextProvider } from "@/contexts/seller/OrderFormContext";
 import OrderManagement from "@/pages/seller/OrderManagement";
 import OrderDetail from "./OrderDetail";
 import Dashboard from "./DashBaord";
+import NewProduct from "./NewProduct";
+
 const SellerHome = () => {
   return (
     <div className="seller-home">
@@ -43,6 +45,14 @@ const SellerHome = () => {
               <ProductsFilterContextProvider>
                 <ProductManagement />
               </ProductsFilterContextProvider>
+            }
+          />
+          <Route
+            path="/products/new"
+            element={
+              <ProductFormContextProvider>
+                <NewProduct />
+              </ProductFormContextProvider>
             }
           />
           <Route

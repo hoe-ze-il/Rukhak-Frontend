@@ -21,7 +21,7 @@ import TextField from "@mui/material/TextField";
 import Pagination from "@mui/material/Pagination";
 import Button from "@mui/material/Button";
 import ProductFilterModal from "@/components/seller/ProductFilterModal";
-import { Search, ArrowDownUp } from "lucide-react";
+import { Search, ArrowDownUp, Plus } from "lucide-react";
 import { useDebounce } from "@/hooks/seller/useDebounce";
 import { useScreenAndSidebarWidth } from "@/hooks/admin/useScreenAndSidebarWidth";
 import { Link } from "react-router-dom";
@@ -157,7 +157,14 @@ const ProductManagement = () => {
   return (
     <div className="listing-container">
       <div className="listing-header">
-        <h1>Product Management</h1>
+        <div>
+          <h1>Product Management</h1>
+          <Link to="/seller/products/new">
+            <Button variant="outlined">
+              <Plus /> Add new
+            </Button>
+          </Link>
+        </div>
         <div className="search-filter-div">
           <TextField
             label="Search Product..."
