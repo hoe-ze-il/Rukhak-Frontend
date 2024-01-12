@@ -6,6 +6,7 @@ import useUser from "@/hooks/user/useUser";
 import defaultImage from "@/assets/Default_image.jpg";
 import LogoutButton from "./LogoutButton";
 import rukhakLogo from "/rukhak-logo.png";
+import { NavLink } from "react-router-dom";
 
 export const SidebarContext = createContext();
 
@@ -17,11 +18,14 @@ function Sidebar({ children }) {
     <aside>
       <nav className="navbar">
         <div className="header">
-          <img
-            src={rukhakLogo}
-            className={`logo ${expanded ? "expanded" : "collapsed"}`}
-            alt=""
-          />
+          <NavLink to="/">
+            <img
+              src={rukhakLogo}
+              className={`logo ${expanded ? "expanded" : "collapsed"}`}
+              alt=""
+            />
+          </NavLink>
+
           <IconButton
             sx={{
               backgroundColor: "#f5f5f5",
