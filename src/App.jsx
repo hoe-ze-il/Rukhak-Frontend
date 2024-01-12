@@ -11,7 +11,7 @@ import { UserProvider } from "./contexts/user/UserContext";
 import { SearchProductsContextProvider } from "./contexts/user/SearchContext";
 import { CartProvider } from "./contexts/user/CartContext";
 // Internal components
-import Homepage from "./pages/Home/Homepage";
+import Homepage from "./pages/Home/HomePage";
 import ForumPage from "./pages/user/Forum/ForumPage";
 import OrderHistory from "./pages/user/OrderHistory/OrderHistory";
 import Cart from "./pages/user/Cart/Cart";

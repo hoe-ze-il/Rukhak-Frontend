@@ -4,9 +4,9 @@ import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import PersonalPost from "@/pages/user/forum/posts/PersonalPost";
-import Followers from "@/pages/user/forum/userList/Followers";
-import Following from "@/pages/user/forum/userList/Following";
+import PersonalPost from "@/pages/user/Forum/posts/PersonalPost";
+import Followers from "@/pages/user/Forum/userList/Followers";
+import Following from "@/pages/user/Forum/userList/Following";
 const TabInfo = ({ user }) => {
   const [value, setValue] = useState("post");
 
