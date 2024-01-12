@@ -50,7 +50,7 @@ function ChatInterface() {
 
     try {
       const response = await Axios.post(
-        "http://localhost:3000/api/v1/bot/textQuery",
+        import.meta.env.VITE_BASE_URL + "/bot/textquery",
         { text: text }
       );
 
