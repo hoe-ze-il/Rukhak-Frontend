@@ -22,7 +22,6 @@ const settingTheme = createTheme({
   settingContainer: {
     maxWidth: "500px",
     margin: "0 auto",
-    backgroundColor: "background.paper",
   },
   imagePreview: {
     width: "100%",
@@ -51,7 +50,7 @@ const settingTheme = createTheme({
   updateNameContainer: {
     display: "flex",
     flexDirection: "column",
-    width: "100%"
+    width: "100%",
   },
   updateNameInputContainer: {
     display: "flex",
@@ -91,7 +90,7 @@ const settingTheme = createTheme({
     fontSize: "30px",
     textAlign: "center",
     borderRadius: "20px",
-    backgroundColor: "#fcfdf6",
+    backgroundColor: "#f5f7f8r",
     color: "#256c2c",
     caretColor: "transparent",
     "&:focus": {

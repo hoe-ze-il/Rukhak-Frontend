@@ -126,9 +126,12 @@ function ConfirmOTP({ isUpdateEmail, isTwoFactors, isEDTwoFactors }) {
   };
 
   const handleResentOTP = async () => {
+    const data = isUpdateEmail
+      ? { email: user?.email, newEmail: user?.tempEmail }
+      : { email };
     if (email) {
       try {
-        const response = await resendOTP({ email }).unwrap();
+        const response = await resendOTP({ ...data }).unwrap();
         if (response?.status === "success") {
           setIsSuccessResent(true);
         }

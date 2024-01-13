@@ -85,8 +85,7 @@ function SideBar() {
         display: "flex",
         flexDirection: "column",
         width: anchor === "top" || anchor === "bottom" ? "auto" : 280,
-        height: "100%",
-        backgroundColor: "background.default",
+        height: "100vh",
       }}
       role="presentation"
     >
@@ -105,7 +104,7 @@ function SideBar() {
           <Divider />
           <ListItem
             disablePadding
-            onClick={() => handleCloseDrawer("/useraccount", anchor)}
+            onClick={() => handleCloseDrawer("/setting", anchor)}
           >
             <ListItemButton>
               <ListItemIcon>
@@ -144,7 +143,7 @@ function SideBar() {
       </List>
 
       {/* Logout Button */}
-      <List sx={{ marginTop: "auto", backgroundColor: "#FCFDF6" }}>
+      <List sx={{ marginTop: "auto" }}>
         <Divider />
         <ListItem disablePadding onClick={() => handleLoginLogout(anchor)}>
           <ListItemButton>

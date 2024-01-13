@@ -60,10 +60,10 @@ export const authApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     resendOTP: builder.mutation({
-      query: (email) => ({
+      query: (data) => ({
         url: "/auth/resend/email-otp",
         method: "POST",
-        body: email,
+        body: { ...data },
       }),
     }),
     signupSeller: builder.mutation({

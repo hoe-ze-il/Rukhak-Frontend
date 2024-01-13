@@ -59,6 +59,7 @@ function LoginForm() {
         }
       }
     } catch (err) {
+      console.log(err);
       const errorStatus = err?.status;
       if (errorStatus === 400) {
         setErrApi("Email or Password is incorrect. Please try again.");
