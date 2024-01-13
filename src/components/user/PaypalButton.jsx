@@ -23,11 +23,11 @@ function PayPalButton({ orderItems }) {
   const orderData = {
     userId: user?._id,
     cartItems: mappedOrderItems,
-    paymentMethod: "cash_on_delivery" || "credit_card" ,
+    paymentMethod: "cash_on_delivery" || "credit_card",
     isPaid: true,
     shipping: { address: curAddress?._id },
   };
-
+  console.log("in pp btn", orderItems);
 
   // Calculate the total amount of products
   const total = orderItems
@@ -76,7 +76,7 @@ function PayPalButton({ orderItems }) {
       const handlePostOrder = async () => {
         try {
           console.log("button click:", details);
-          console.log('Order Data', orderData)
+          console.log("Order Data", orderData);
           const response = await order({ ...orderData }).unwrap();
           console.log("respnse", response);
         } catch (err) {
@@ -99,7 +99,14 @@ function PayPalButton({ orderItems }) {
   };
 
   return (
-    <PayPalScriptProvider options={paypalOptions}>
+    <PayPalScriptProvider
+      options={{
+        ...paypalOptions,
+        "data-sdk-integration-source": "react-paypal-js",
+        "client-id":
+          "AeFm85G1ycbCIgmQx22qdKdW1QxXBRrUADRnulSvgRfQcfN-wuGLnWLNDxmAEaHFC7fqKvI1bz3rhOaz",
+      }}
+    >
       <PayPalButtons
         style={{
           layout: "vertical",
