@@ -22,6 +22,7 @@ const UPDATE_TOTAL_QUANTITY_CART = "UPDATE_TOTAL_QUANTITY_CART";
 const UPDATE_TOTAL_QUANTITY_BUYNOW = "UPDATE_TOTAL_QUANTITY_BUYNOW";
 const ADD_TO_BUY_NOW = "ADD_TO_BUY_NOW";
 const CLEAR_BUY_NOW_ITEMS = "CLEAR_BUY_NOW_ITEMS";
+const CLEAR_CART = "CLEAR_CART"; // Added action type
 
 // Reducer function to manage cart state
 const cartReducer = (state, action) => {
@@ -75,6 +76,14 @@ const cartReducer = (state, action) => {
       return {
         ...state,
         buyNowItems: [],
+      };
+    }
+
+    case CLEAR_CART: {
+      return {
+        ...state,
+        cartItems: [],
+        totalQuantityCart: 0,
       };
     }
 
@@ -136,7 +145,6 @@ const CartProvider = ({ children }) => {
       0
     );
 
-    console.log(totalQuantityCart);
     dispatch({
       type: "UPDATE_TOTAL_QUANTITY_CART",
       payload: { totalQuantityCart },
@@ -149,7 +157,6 @@ const CartProvider = ({ children }) => {
       0
     );
 
-    console.log("total qty of buynow:", totalQuantityBuynow);
     dispatch({
       type: "UPDATE_TOTAL_QUANTITY_BUYNOW",
       payload: { totalQuantityBuynow },
@@ -160,6 +167,10 @@ const CartProvider = ({ children }) => {
     dispatch({ type: ADD_TO_BUY_NOW, payload: productId });
   };
 
+  const clearCart = () => {
+    dispatch({ type: CLEAR_CART });
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -168,6 +179,7 @@ const CartProvider = ({ children }) => {
         cartItems: state.cartItems,
         buyNowItems: state.buyNowItems,
         addToBuyNow,
+        clearCart,
         dispatch,
       }}
     >
@@ -176,7 +188,6 @@ const CartProvider = ({ children }) => {
   );
 };
 
-// Custom hook to access the cart state and dispatch function
 const useCart = () => {
   const context = useContext(CartContext);
 
@@ -188,3 +199,4 @@ const useCart = () => {
 };
 
 export { CartProvider, useCart };
+

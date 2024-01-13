@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import {
   useGetAllProductsQuery,
@@ -7,16 +7,12 @@ import {
 import { useSelector } from "react-redux";
 import { selectCurrentUserId } from "@/features/auth/authSlice";
 import { useDeleteReviewMutation } from "@/features/review/reviewSlice";
-
-// MUI components
 import styled from "@mui/material/styles/styled";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
-
-// MUI icons
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import Badge from "@mui/material/Badge";
 
-// Internal components
 import ProductCarousel from "./ProductCarousel";
 import SectionHeader from "@/components/user/SectionHeader";
 import SecondaryTopNavigationBar from "@/components/user/SecondaryTopNavigationBar";
@@ -29,7 +25,7 @@ import ReviewsSection from "./ReviewsSection";
 import CurrentUserReview from "./CurrentUserReview";
 import ErrorModal from "@/components/user/ErrorModal";
 import { CartContext } from "@/contexts/user/CartContext";
-import Badge from "@mui/material/Badge";
+import ConfirmationModal from "./ConfirmAddCart";
 
 const mb2 = { marginBottom: "1rem" };
 const p2 = { padding: "1rem" };
@@ -37,7 +33,11 @@ const p2 = { padding: "1rem" };
 const SectionBox = styled(Box)(mb2);
 
 const ProductDetailsPage = () => {
-  const { totalQuantityCart, buyNowItems, dispatch } = useContext(CartContext);
+  const { totalQuantityCart, buyNowItems, dispatch, cartItems } = useContext(
+    CartContext
+  );
+  const [isConfirmationOpen, setConfirmationOpen] = useState(false);
+  const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false); // New state
   const location = useLocation();
   const navigate = useNavigate();
   const userId = useSelector(selectCurrentUserId);
@@ -50,6 +50,7 @@ const ProductDetailsPage = () => {
     categories: product?.categories[0],
   });
 
+  const [productAdd, setProductAdd] = useState([]);
   console.log(product);
 
   const [quantity, setQuantity] = useState(1);
@@ -61,9 +62,27 @@ const ProductDetailsPage = () => {
       images: product.signedImgCover,
       price: product.unitPrice,
       quantity: quantity,
+      seller: product.sellerId,
     };
-    console.log(productToAdd);
-    dispatch({ type: "ADD_TO_CART", payload: productToAdd });
+    setProductAdd(productToAdd)
+    // Check if the cart is not empty
+    if (cartItems.length > 0) {
+      // Check if the current product is from a different store
+      const isDifferentStore = cartItems.some(
+        (item) => item.seller.id !== productToAdd.seller.id
+      );
+
+      // If the current product is from a different store, open the confirmation modal
+      if (isDifferentStore) {
+        setConfirmationModalOpen(true);
+      } else {
+        // If the current product is from the same store, simply add it to the cart
+        dispatch({ type: "ADD_TO_CART", payload: productToAdd });
+      }
+    } else {
+      // If the cart is empty, simply add the product
+      dispatch({ type: "ADD_TO_CART", payload: productToAdd });
+    }
   };
 
   const handleBuyNow = () => {
@@ -96,7 +115,6 @@ const ProductDetailsPage = () => {
         />
       )}
       <Box component="main" sx={{ marginBottom: "2.5rem" }}>
-        {/* Top Bar */}
         <SecondaryTopNavigationBar
           returnPrevLink={-1}
           rightIcon={
@@ -113,15 +131,12 @@ const ProductDetailsPage = () => {
         )}
         {product && (
           <Box sx={{ backgroundColor: "background.default" }}>
-            {/* Product Carousel */}
             <ProductCarousel
               images={[product.signedImgCover, ...product.signedMedia]}
               averageRating={product.averageRating}
             />
 
-            {/* Details wrapper */}
             <Box sx={p2}>
-              {/* Top section */}
               <SectionBox>
                 <TopSection
                   unitPrice={product.unitPrice}
@@ -130,7 +145,6 @@ const ProductDetailsPage = () => {
               </SectionBox>
               <Divider sx={mb2} />
 
-              {/* Buy section */}
               <SectionBox>
                 <BuySection
                   quantity={quantity}
@@ -141,24 +155,20 @@ const ProductDetailsPage = () => {
               </SectionBox>
               <Divider sx={mb2} />
 
-              {/* Info section */}
               <SectionBox>
                 <StoreInfoSection seller={product.sellerId} />
               </SectionBox>
               <Divider sx={mb2} />
 
-              {/* Description section */}
               <SectionBox>
                 <DescriptionSection description={product.description} />
               </SectionBox>
               <Divider sx={mb2} />
 
-              {/* Reviews section */}
               <SectionBox>
                 <ReviewsSection reviews={reviews} productId={productId} />
               </SectionBox>
 
-              {/* Current user review or create review button */}
               <SectionBox id="user-review">
                 <CurrentUserReview
                   reviews={reviews}
@@ -167,7 +177,6 @@ const ProductDetailsPage = () => {
                 />
               </SectionBox>
 
-              {/* Similar Product section */}
               <SectionBox>
                 <SectionHeader title="similar products" />
                 {/* {similarProducts && (
@@ -178,6 +187,16 @@ const ProductDetailsPage = () => {
           </Box>
         )}
       </Box>
+      <ConfirmationModal
+        open={isConfirmationModalOpen}
+        onClose={() => setConfirmationModalOpen(false)}
+        onConfirm={() => {
+          dispatch({ type: "CLEAR_CART" });
+          dispatch({ type: "ADD_TO_CART", payload: productAdd });
+          setConfirmationModalOpen(false);
+        }}
+        message="Adding a product from a different store will remove the previous product from the cart. Are you sure?"
+      />
     </>
   );
 };
