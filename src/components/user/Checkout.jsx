@@ -54,9 +54,10 @@ function Checkout({itemToOrder, fromCart}) {
       shipping: { address: curAddress?._id },
     };
     try {
+      navigate("/order-is-confirmed");
       const response = await createOrder(orderData).unwrap();
       console.log("Order create successfully", response);
-      navigate("/order-is-confirmed");
+      dispatch({ type: "CLEAR_CART" });
     } catch (error) {
       console.log("Failed to create order", error)
     }

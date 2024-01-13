@@ -13,7 +13,7 @@ function PayPalCheckout() {
   console.log("buy", buyNowItems);
   console.log("cart", cartItems);
   console.log("itemtopay", itemsToPay);
-
+ 
   return (
     <Box sx={{ minHeight: "100vh" }}>
       <SecondaryTopNavigationBar returnPrevLink={-1} label="Payment" />

@@ -2,8 +2,12 @@ import { useOrderMutation } from "@/features/order/orderApiSlice";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useNavigate } from "react-router-dom";
 import useUser from "@/hooks/user/useUser";
-
+import { CartContext } from "@/contexts/user/CartContext";
+import { useContext } from "react";
 function PayPalButton({ orderItems }) {
+  const { dispatch } = useContext(
+    CartContext
+  );
   const { curAddress, user } = useUser();
   const navigate = useNavigate();
   const [order, { isLoading }] = useOrderMutation();
@@ -81,9 +85,11 @@ function PayPalButton({ orderItems }) {
       };
       if (details?.status === "COMPLETED") {
         handlePostOrder();
+        dispatch({ type: "CLEAR_CART" });
+        navigate("/order-is-confirmed");
       }
 
-      navigate("/order-is-confirmed");
+     
     });
   };
 
