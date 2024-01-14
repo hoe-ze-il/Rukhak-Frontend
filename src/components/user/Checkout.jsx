@@ -55,9 +55,9 @@ function Checkout({itemToOrder, fromCart}) {
     };
     try {
       navigate("/order-is-confirmed");
+       dispatch({ type: "CLEAR_CART" });
       const response = await createOrder(orderData).unwrap();
       console.log("Order create successfully", response);
-      dispatch({ type: "CLEAR_CART" });
     } catch (error) {
       console.log("Failed to create order", error)
     }
