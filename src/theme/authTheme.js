@@ -176,7 +176,6 @@ const authTheme = createTheme({
     flexDirection: "column",
     gap: "20px",
     height: "95vh",
-    backgroundColor: "background.paper",
   },
   DateAndGenderContainer: {
     display: "flex",
