@@ -36,7 +36,6 @@ const ProductDetailsPage = () => {
   const { totalQuantityCart, buyNowItems, dispatch, cartItems } = useContext(
     CartContext
   );
-  const [isConfirmationOpen, setConfirmationOpen] = useState(false);
   const [isConfirmationModalOpen, setConfirmationModalOpen] = useState(false); // New state
   const location = useLocation();
   const navigate = useNavigate();

@@ -141,24 +141,27 @@ const CartProvider = ({ children }) => {
 
   useEffect(() => {
     const totalQuantityCart = state.cartItems.reduce(
-      (total, productId) => total + productId.quantity,
+      (total, product) => total + product.quantity,
       0
     );
 
     dispatch({
-      type: "UPDATE_TOTAL_QUANTITY_CART",
+      type: UPDATE_TOTAL_QUANTITY_CART,
       payload: { totalQuantityCart },
     });
+
+    // Update localStorage whenever cartItems change
+    localStorage.setItem("cart", JSON.stringify(state.cartItems));
   }, [state.cartItems]);
 
   useEffect(() => {
     const totalQuantityBuynow = state.buyNowItems.reduce(
-      (total, productId) => total + productId.quantity,
+      (total, product) => total + product.quantity,
       0
     );
 
     dispatch({
-      type: "UPDATE_TOTAL_QUANTITY_BUYNOW",
+      type: UPDATE_TOTAL_QUANTITY_BUYNOW,
       payload: { totalQuantityBuynow },
     });
   }, [state.buyNowItems]);
@@ -169,6 +172,8 @@ const CartProvider = ({ children }) => {
 
   const clearCart = () => {
     dispatch({ type: CLEAR_CART });
+    localStorage.removeItem("cart");
+    localStorage.removeItem("totalQuantityCart");
   };
 
   return (
